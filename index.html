@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tunisian Odyssey</title>
+
+    <!-- Leaflet CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">The Tunisian Odyssey</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <div class="loading-text">Loading Historical Journey...</div>
+    </div>
+
+    <!-- Animated Starfield Background -->
+    <div class="starfield" id="starfield"></div>
+
+    <!-- Enhanced Welcome Container -->
+    <div class="welcome-container" id="welcomeContainer">
+        <div class="welcome-card">
+            <div class="welcome-character">
+                <div class="welcome-char-head">
+                    <div class="welcome-char-eyes">
+                        <div class="welcome-eye"></div>
+                        <div class="welcome-eye"></div>
+                    </div>
+                    <div class="welcome-char-mouth"></div>
+                </div>
+                <div class="welcome-char-body">
+                    <div class="welcome-char-hands">
+                        <div class="welcome-hand left"></div>
+                        <div class="welcome-hand right"></div>
+                    </div>
+                </div>
+                <div class="welcome-char-accessory">🏺</div>
+                <div class="welcome-char-glow"></div>
+            </div>
+            <div class="welcome-content">
+                <h2 class="welcome-title">Welcome to The Tunisian Odyssey! 🌟</h2>
+                <p class="welcome-message">Hello Explorer! I'm <span class="welcome-guide-name">Tariq</span>, your personal guide through Tunisia's amazing history! Together, we'll uncover ancient secrets, solve historical puzzles, and earn amazing rewards!</p>
+                <div class="welcome-features">
+                    <div class="welcome-feature">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <div>
+                            <span class="feature-title">Interactive Exploration</span>
+                            <span class="feature-desc">Explore 18 historical sites across 6 eras</span>
+                        </div>
+                    </div>
+                    <div class="welcome-feature">
+                        <i class="fas fa-coins"></i>
+                        <div>
+                            <span class="feature-title">Earn & Unlock</span>
+                            <span class="feature-desc">Collect coins to unlock 12 unique avatars</span>
+                        </div>
+                    </div>
+                    <div class="welcome-feature">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <span class="feature-title">Climb Ranks</span>
+                            <span class="feature-desc">Complete challenges to reach "Legend" status</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="welcome-tips">
+                    <div class="welcome-tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Tip: Start with the Ancient Carthage era to learn the basics!</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary welcome-start-btn" id="welcomeStartBtn">
+                    Begin Adventure! <i class="fas fa-play-circle"></i>
+                </button>
+                <p class="welcome-note">New explorers receive 100 bonus coins to get started!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Guide System -->
+    <div class="guide-container" id="guideContainer">
+        <div class="guide-card">
+            <div class="guide-header">
+                <div class="guide-character">
+                    <div class="guide-char-animated">
+                        <div class="guide-char-head">
+                            <div class="guide-char-eyes">
+                                <div class="guide-eye"></div>
+                                <div class="guide-eye"></div>
+                            </div>
+                            <div class="guide-char-mouth"></div>
+                        </div>
+                        <div class="guide-char-body">
+                            <div class="guide-char-hands">
+                                <div class="guide-hand left"></div>
+                                <div class="guide-hand right"></div>
+                            </div>
+                        </div>
+                        <div class="guide-char-accessory">📚</div>
+                        <div class="guide-char-glow"></div>
+                    </div>
+                </div>
+                <div class="guide-header-text">
+                    <h3 class="guide-name">Tariq</h3>
+                    <p class="guide-title">Your History Guide</p>
+                </div>
+                <button class="guide-skip" id="guideSkipBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="guide-content" id="guideContent">
+                <!-- Guide content will be dynamically loaded here -->
+            </div>
+
+            <div class="guide-navigation">
+                <button class="btn btn-secondary" id="prevGuideBtn">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </button>
+
+                <div class="guide-progress" id="guideProgress">
+                    <!-- Progress dots will be dynamically loaded here -->
+                </div>
+
+                <button class="btn btn-primary" id="nextGuideBtn">
+                    Next Step
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Signup Interface -->
+    <div class="auth-container" id="authContainer">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-landmark"></i>
+                    <span>The Tunisian Odyssey</span>
+                </div>
+                <h1>Begin Your Historical Journey</h1>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm" >
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="loginUsername" placeholder="Username" required>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn auth-btn">
+                    <span>Enter History</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="auth-divider">
+                    <span>Or continue with</span>
+                </div>
+                <div class="social-auth">
+                    <button type="button" class="btn social-btn">
+                        <i class="fab fa-google"></i>
+                        Google
+                    </button>
+                    <button type="button" class="btn social-btn">
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </button>
+                </div>
+            </form>
+
+            <!-- Signup Form -->
+            <form class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signupUsername" placeholder="Choose Username" required>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signupEmail" placeholder="Email Address" required>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupPassword" placeholder="Create Password" required>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="termsAgreement" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn auth-btn">
+                    <span>Start Adventure</span>
+                    <i class="fas fa-rocket"></i>
+                </button>
+            </form>
+
+            <div class="auth-particles" id="authParticles"></div>
+        </div>
+    </div>
+
+    <!-- Main Game Interface -->
+    <div class="game-interface" id="gameInterface">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="logo">Tunisia History Explorer</div>
+                <div class="player-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-coins"></i>
+                        <span class="stat-value" id="playerPoints">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <span class="stat-value" id="playerRank">Novice</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-medal"></i>
+                        <span class="stat-value" id="playerBadges">0</span>
+                    </div>
+                    <div class="user-menu">
+                        <button class="btn-user" id="userMenuBtn">
+                            <div class="user-avatar-preview">
+                                <i class="fas fa-user-circle" id="headerAvatarIcon"></i>
+                            </div>
+                            <span id="usernameDisplay">Guest</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="#" class="dropdown-item" id="profileBtn">
+                                <i class="fas fa-user"></i>
+                                Profile & Avatar
+                            </a>
+                            <a href="#" class="dropdown-item" id="avatarShopBtn">
+                                <i class="fas fa-store"></i>
+                                Avatar Shop
+                            </a>
+                            <a href="#" class="dropdown-item" id="settingsBtn">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <a href="#" class="dropdown-item" id="guideBtn">
+                                <i class="fas fa-question-circle"></i>
+                                Help & Tutorial
+                            </a>
+                            <a href="#" class="dropdown-item" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h2>Historical Eras</h2>
+                <ul class="era-list" id="eraList">
+                    <!-- Eras will be dynamically added here -->
+                </ul>
+                <div class="sidebar-footer">
+                    <button class="btn btn-secondary btn-small" id="showGuideBtn">
+                        <i class="fas fa-question-circle"></i>
+                        Show Tutorial
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content-area">
+                <!-- Map Container -->
+                <div class="map-container">
+                    <div id="map"></div>
+                    <div class="map-overlay">
+                        <h3>Map Legend</h3>
+                        <div class="map-legend">
+                            <div class="legend-item">
+                                <div class="legend-marker undiscovered"></div>
+                                <span>Undiscovered</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-marker discovered"></div>
+                                <span>Discovered</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-marker current"></div>
+                                <span>Current Focus</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Progress -->
+                <div class="timeline-view">
+                    <h2>Historical Timeline</h2>
+                    <p class="timeline-subtitle">Your journey through Tunisia's history</p>
+                    
+                    <div class="timeline-progress" id="timelineProgress">
+                        <div class="timeline-track">
+                            <!-- Progress will be shown here -->
+                        </div>
+                        <div class="timeline-milestones" id="timelineMilestones">
+                            <!-- Milestones will be added here -->
+                        </div>
+                    </div>
+                    
+
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery">
+                    <h2>Discovered Sites</h2>
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Gallery cards will be dynamically added here -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Enhanced Profile Modal -->
+        <div class="modal" id="profileModal">
+            <div class="modal-content profile-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <i class="fas fa-user-circle"></i>
+                        Explorer Profile
+                    </h2>
+                    <button class="modal-close" id="closeProfileModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="profile-content" id="profileContent">
+                    <!-- Profile content will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Avatar Shop Modal -->
+        <div class="modal" id="avatarShopModal">
+            <div class="modal-content avatar-shop-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        <i class="fas fa-store"></i>
+                        Avatar Shop
+                    </h2>
+                    <div class="avatar-shop-balance">
+                        <i class="fas fa-coins"></i>
+                        <span id="shopBalance">0</span> coins
+                    </div>
+                    <button class="modal-close" id="closeAvatarShopModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="avatar-shop-content" id="avatarShopContent">
+                    <!-- Avatar shop content will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="modal" id="settingsModal">
+            <div class="modal-content settings-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Game Settings</h2>
+                    <button class="modal-close" id="closeSettingsModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="settings-content" id="settingsContent">
+                    <div class="setting-section">
+                        <h3>Gameplay</h3>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Difficulty Level</div>
+                                <div class="setting-description">Affects point rewards and hint availability</div>
+                            </div>
+                            <select id="difficultySetting" class="setting-select">
+                                <option value="easy">Easy</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Auto-Save</div>
+                                <div class="setting-description">Automatically save progress</div>
+                            </div>
+                            <label class="setting-toggle">
+                                <input type="checkbox" id="autoSaveSetting" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-section">
+                        <h3>Visual & Audio</h3>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Animations</div>
+                                <div class="setting-description">Enable visual animations and effects</div>
+                            </div>
+                            <label class="setting-toggle">
+                                <input type="checkbox" id="animationsSetting" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Sound Effects</div>
+                                <div class="setting-description">Enable game sound effects</div>
+                            </div>
+                            <label class="setting-toggle">
+                                <input type="checkbox" id="soundSetting" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-section">
+                        <h3>Guides & Help</h3>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Guide Frequency</div>
+                                <div class="setting-description">How often to show guide tips</div>
+                            </div>
+                            <select id="guideFrequencySetting" class="setting-select">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Show Tutorial</div>
+                                <div class="setting-description">Restart the tutorial guide</div>
+                            </div>
+                            <button class="btn btn-secondary btn-small" onclick="restartTutorial()">
+                                Restart Tutorial
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-section">
+                        <h3>Data Management</h3>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Reset Progress</div>
+                                <div class="setting-description">Clear all game progress (cannot be undone)</div>
+                            </div>
+                            <button class="btn btn-secondary btn-small" onclick="resetGameProgress()">
+                                Reset Game
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Modal -->
+        <div class="modal" id="quizModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="quizTitle">Historical Challenge</h2>
+                    <button class="modal-close" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="quiz-container" id="quizContainer">
+                    <!-- Quiz content will be dynamically added here -->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div class="notification" id="notification">
+            <i class="notification-icon fas fa-check-circle"></i>
+            <div class="notification-message" id="notificationMessage">Notification message</div>
+        </div>
+
+        <!-- Site Photo Preview Modal -->
+        <div class="modal" id="photoPreviewModal">
+            <div class="modal-content photo-preview-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="photoTitle"></h2>
+                    <button class="modal-close" id="closePhotoModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="photo-preview-content">
+                    <img id="previewImage" src="" alt="">
+                    <div class="photo-info">
+                        <p id="photoDescription"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS for OpenStreetMap -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Game Data -->
+    <script src="game-data.js"></script>
+
+    <!-- Main Game Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
