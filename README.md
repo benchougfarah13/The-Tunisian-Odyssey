@@ -1,0 +1,94 @@
+# The Tunisian Odyssey
+> Interactive historical game with geospatial mapping of Tunisian archaeological sites and landmarks
+
+[![Leaflet](https://img.shields.io/badge/Leaflet-1.9-green.svg)](https://leafletjs.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![HTML5](https://img.shields.io/badge/HTML5-Latest-E34C26.svg)](https://html.spec.whatwg.org/)
+[![CSS3](https://img.shields.io/badge/CSS3-Latest-1572B6.svg)](https://www.w3.org/Style/CSS/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+A gamified educational experience combining web mapping technology with interactive quizzes. Players explore Tunisia's rich historical heritage across multiple eras, discover archaeological sites on an interactive map, and test their knowledge through mini-games.
+
+## 6 Core Features
+
+| Feature | Purpose |
+|---------|---------|
+| **Interactive Map** | Leaflet/OpenStreetMap geospatial visualization |
+| **Historical Eras** | Ancient Carthage, Islamic Golden Age, Ottoman, Modern Tunisia |
+| **Mini-Games** | Quiz-based learning at archaeological sites |
+| **User Authentication** | Account system for progress tracking |
+| **Gamification** | Points, badges, ranks, and site unlocking |
+| **Rich Media** | Images of 15+ Tunisian landmarks |
+
+## Quick Start
+
+**Prerequisites**: Modern web browser with JavaScript enabled
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/The-Tunisian-Odyssey.git
+cd The-Tunisian-Odyssey
+
+# Open in browser
+open index.html          # macOS
+start index.html         # Windows
+```
+
+**Gameplay**:
+1. Sign up with a username and password
+2. Choose an avatar from the Avatar Shop
+3. Select a historical era to unlock
+4. Click map markers to visit sites
+5. Complete quizzes to earn points and unlock new eras
+
+## Tech Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Mapping**: Leaflet.js 1.7.1 (OpenStreetMap)
+- **Icons**: Font Awesome 6.4.0
+- **Typography**: Google Fonts (Orbitron, Rajdhani)
+- **Styling**: Custom CSS with animations and responsive design
+
+## File Structure
+
+```
+├── index.html          # Main HTML file
+├── script.js           # Game logic and functionality
+├── game-data.js        # Historical data and mini-game content
+├── styles.css          # Styling and animations
+└── images/             # Historical site images
+    ├── carthage-ruins.jpg
+    ├── dougga.jpg
+    ├── eljem.jpg
+    └── ... (other landmark images)
+```
+
+## Historical Eras
+
+- **Ancient Carthage** (814-146 BCE): Phoenician city-state and Mediterranean power
+- **Islamic Golden Age** (7th-13th centuries): Development of Islamic culture and architecture
+- **Ottoman Period** (1574-1881): Ottoman rule and cultural integration
+- **Modern Tunisia** (1956-present): Post-independence Tunisia
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "feat: description"`
+4. Push to the branch and open a Pull Request
+
+## License
+
+MIT License – See [LICENSE](LICENSE)
+
+## Resources
+
+- [Leaflet.js](https://leafletjs.com/) – Interactive maps
+- [OpenStreetMap](https://www.openstreetmap.org/) – Map tiles and data
+- [Font Awesome](https://fontawesome.com/) – Icon library
+- [Google Fonts](https://fonts.google.com/) – Typography
+- [Web Mapping Course](https://www.example.com/) – Educational resource
+
+---
+
+*Explore Tunisia's history. Master the knowledge. Complete your odyssey!*
