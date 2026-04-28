@@ -1,0 +1,81 @@
+# The Tunisian Odyssey
+
+An interactive educational web game that takes players on a historical journey through Tunisia's most iconic archaeological sites and landmarks.
+
+## Overview
+
+The Tunisian Odyssey is a gamified educational experience that combines web mapping technology with interactive quizzes. Players explore Tunisia's rich historical heritage across multiple eras, discover archaeological sites on an interactive map, and test their knowledge through mini-games.
+
+## Features
+
+- **Interactive Map**: Explore historical sites using Leaflet/OpenStreetMap integration
+- **Multiple Historical Eras**: Navigate through different periods of Tunisian history
+  - Ancient Carthage
+  - Islamic Golden Age
+  - Ottoman Period
+  - Modern Tunisia
+- **Mini-Games**: Engage with quizzes at each historical site
+- **User Authentication**: Login system to track progress and achievements
+- **Gamification**:
+  - Earn points and badges
+  - Track player rank
+  - Unlock new sites and eras
+- **Rich Media**: Images of famous landmarks (Carthage Ruins, Dougga, El Jem Amphitheater, etc.)
+
+## Getting Started
+
+1. **Open the Application**
+   - Open `index.html` in a modern web browser
+
+2. **Create an Account**
+   - Sign up with a username and password
+   - Choose an avatar from the Avatar Shop
+
+3. **Start Exploring**
+   - Select a historical era to unlock
+   - Click on map markers to visit sites
+   - Complete quizzes to earn points
+
+## Tech Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Mapping**: Leaflet.js (OpenStreetMap)
+- **UI Components**: Font Awesome icons, Google Fonts (Orbitron, Rajdhani)
+- **Styling**: Custom CSS with animations and responsive design
+
+## File Structure
+
+```
+├── index.html          # Main HTML file
+├── script.js           # Game logic and functionality
+├── game-data.js        # Historical data and mini-game content
+├── styles.css          # Styling and animations
+└── images/             # Historical site images
+    ├── carthage-ruins.jpg
+    ├── dougga.jpg
+    ├── eljem.jpg
+    └── ... (other landmark images)
+```
+
+## How to Play
+
+1. **Explore Sites**: Navigate the interactive map to discover historical locations
+2. **Complete Quizzes**: Answer questions about Tunisian history at each site
+3. **Earn Rewards**: Gain points, badges, and unlock new eras as you progress
+4. **Customize Avatar**: Visit the Avatar Shop to personalize your player character
+
+## Browser Requirements
+
+- Modern browser with JavaScript enabled
+- Internet connection (for map tiles and external resources)
+- Leaflet 1.7.1 and Font Awesome 6.4.0 (loaded via CDN)
+
+## Course Information
+
+- **Course**: Web Mapping (1st Semester)
+- **Subject**: Geography (GEOM)
+- **Institution**: University Studies
+
+---
+
+*Explore Tunisia's history. Master the knowledge. Complete your odyssey!*
